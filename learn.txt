@@ -1,0 +1,6 @@
+yarn create react-app . (with no new directory)
+yarn create react-app <project-directory-name>
+
+
+
+yarn init - creates a simple package.json file
