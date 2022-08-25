@@ -25,22 +25,29 @@ const io = new Server(server, {
 // on - first arg-> connection event, second arg - function starts running
 // whenever a user is connected, 
 io.on("connection", (socket) => {
+    // client ids connected to socket connection
     console.log(`User Connected: ${socket.id}`)
+
+    // JOIN Room Example
+    // socket.join -> your specifiying some sort of value like number where its the id of the room you are joining
+    // you are joining a room when you call this function
+    // listening to an event join_room from client
+    socket.on("join_room", (data) => {
+        socket.join(data)
+    })
+
+    // receive or listen to data sent by Frontend
     socket.on("send_message", (data) => {
-        // receive or listen to data sent by Frontend
         console.log(data);
-        // broadcast to everyone who is connected to this socket server
-        // sent event to FE
-        socket.broadcast.emit("receive_message", data)
 
-        // JOIN Room Example
-        // socket.join -> your specifiying some sort of value like number where its the id of the room you are joining
-        // you are joining a room when you call this function
+        // #broadcast to everyone who is connected to this socket server
+        // #sent event to FE
+        // socket.broadcast.emit("receive_message", data)
 
-        // listening to an event join_room from client
-        socket.on("join_room", (data) => {
-            socket.join(data)
-        })
+        // on send_message event, we are sending the socket.to to the room we wanna send this message to
+        // and then we are emitting receiving message
+        socket.to(data.room).emit("receive_message", data)
+
     })
 })
 
@@ -48,3 +55,4 @@ io.on("connection", (socket) => {
 server.listen(3001, () => [
     console.log("SERVER is running")
 ])
+

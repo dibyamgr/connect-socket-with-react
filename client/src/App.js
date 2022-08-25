@@ -18,9 +18,10 @@ function App() {
 
     // send event to BE server
     socket.emit("send_message", {
-      message
+      message, room
     });
   }
+  // we specify which room we are in as well
 
   // listen to event from BE
   // this hook will be called whenever we recieve a message so it serves as a function that runs everytime an event is thrown to us
