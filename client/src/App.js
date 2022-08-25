@@ -7,6 +7,10 @@ const socket = io.connect("http://localhost:3001");
 function App() {
   const [message, setMessage] = useState("");
   const [messageReceived, setMessageReceived] = useState("");
+
+  // Room State
+  const [room, setRoom] = useState("")
+
   // emit a message
   const sendMessage = () => {
     // can emit some sort of event so that another person can listen to it
@@ -29,6 +33,13 @@ function App() {
     });
   }, [socket])
   // pass socket variable as dependency list
+
+  // Join room function to emit an event
+  const joinRoom = () => {
+    if (room !== "") {
+      socket.emit("join_room", room);
+    }
+  }
   return (
     <div className="App">
       {/* the way socket io works is you create certain events and you name those events 
@@ -46,6 +57,13 @@ function App() {
       <h1 className='mt-10'>
         {messageReceived}
       </h1>
+
+
+      {/* Join Room Example */}
+      <input placeholder="Room No..." onChange={(event) => {
+        setRoom(event.target.value)
+      }} />
+      <button onClick={joinRoom}>Join Room</button>
     </div>
   );
 }
