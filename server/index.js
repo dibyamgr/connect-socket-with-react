@@ -32,6 +32,15 @@ io.on("connection", (socket) => {
         // broadcast to everyone who is connected to this socket server
         // sent event to FE
         socket.broadcast.emit("receive_message", data)
+
+        // JOIN Room Example
+        // socket.join -> your specifiying some sort of value like number where its the id of the room you are joining
+        // you are joining a room when you call this function
+
+        // listening to an event join_room from client
+        socket.on("join_room", (data) => {
+            socket.join(data)
+        })
     })
 })
 

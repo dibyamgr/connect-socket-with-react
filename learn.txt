@@ -6,3 +6,13 @@ yarn init - creates a simple package.json file
 express - to create a server
 cors -socket io acts like a fullstack so that we can serve data to the frontend so to make a connection with the Frontend, we need to install cors
 nodemon - restarts the project automatically everytime we save
+
+
+SEND = emit
+socket.emit ("event_name", data)
+
+LISTEN = on
+io.on("event_name", data)
+
+#for sending events to every clients on socket connection
+socket.broadcast.emit
