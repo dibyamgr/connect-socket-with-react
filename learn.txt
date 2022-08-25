@@ -1,6 +1,8 @@
 yarn create react-app . (with no new directory)
 yarn create react-app <project-directory-name>
 
-
-
 yarn init - creates a simple package.json file
+
+express - to create a server
+cors -socket io acts like a fullstack so that we can serve data to the frontend so to make a connection with the Frontend, we need to install cors
+nodemon - restarts the project automatically everytime we save
